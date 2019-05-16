@@ -6,13 +6,13 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginRequest extends StringRequest {
-    private static final String Regis_URL = "http://127.0.0.1/logincust";
+public class LoginRequest {
+    private static final String Regis_URL = "http://127.0.0.1/login";
     private Map<String ,String> params;
 
     public LoginRequest(String email, String password, Response.Listener<String> listener)
     {
-        
+
 
     }
     public Map<String, String> getParams()

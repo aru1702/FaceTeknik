@@ -6,4 +6,57 @@
     android:layout_height="match_parent"
     tools:context=".ProfileActivity">
 
+    <TextView
+        android:id="@+id/fullname"
+        android:layout_width="157dp"
+        android:layout_height="59dp"
+        android:gravity="center"
+        android:text="Full Name"
+        tools:layout_editor_absoluteX="127dp"
+        tools:layout_editor_absoluteY="103dp" />
+
+    <TextView
+        android:id="@+id/tanggallahir"
+        android:layout_width="157dp"
+        android:layout_height="59dp"
+        android:gravity="center"
+        android:text="Tanggal Lahir"
+        tools:layout_editor_absoluteX="127dp"
+        tools:layout_editor_absoluteY="375dp" />
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="157dp"
+        android:layout_height="59dp"
+        android:gravity="center"
+        android:text="E-mail"
+        tools:layout_editor_absoluteX="127dp"
+        tools:layout_editor_absoluteY="285dp" />
+
+    <TextView
+        android:id="@+id/username"
+        android:layout_width="157dp"
+        android:layout_height="59dp"
+        android:gravity="center"
+        android:text="Username"
+        tools:layout_editor_absoluteX="127dp"
+        tools:layout_editor_absoluteY="201dp" />
+
+    <TextView
+        android:id="@+id/bio"
+        android:layout_width="157dp"
+        android:layout_height="59dp"
+        android:gravity="center"
+        android:text="Bio"
+        tools:layout_editor_absoluteX="127dp"
+        tools:layout_editor_absoluteY="471dp" />
+
+    <Button
+        android:id="@+id/mainMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back to Menu"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="666dp" />
+
 </android.support.constraint.ConstraintLayout>
