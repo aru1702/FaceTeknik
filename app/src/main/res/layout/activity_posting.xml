@@ -6,4 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".PostingActivity">
 
+    <EditText
+        android:id="@+id/textPosting"
+        android:layout_width="270dp"
+        android:layout_height="284dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="post"
+        android:inputType="textMultiLine"
+        android:lines="5"
+        android:singleLine="false"
+        tools:layout_editor_absoluteX="70dp"
+        tools:layout_editor_absoluteY="84dp" />
+
+    <Button
+        android:id="@+id/buttonPosting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Post"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="517dp" />
+
+    <Button
+        android:id="@+id/gotoHomePosting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back to Menu"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="666dp" />
 </android.support.constraint.ConstraintLayout>

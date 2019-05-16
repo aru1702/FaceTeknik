@@ -27,8 +27,8 @@ public class LoginActivity extends AppCompatActivity {
                 final String password = passwordInput.getText().toString();
 
                 // Ketika berhasil login bakal pindah ke newsfeed
-             Intent newsfeedIntent = new Intent(LoginActivity.this , NewsFeed.class);
-             startActivity(newsfeedIntent);
+             Intent mainMenuIntent = new Intent(LoginActivity.this , MainMenuActivity.class);
+             startActivity(mainMenuIntent);
             }
         });
 
