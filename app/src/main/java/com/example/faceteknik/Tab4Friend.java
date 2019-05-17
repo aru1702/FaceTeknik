@@ -2,6 +2,7 @@ package com.example.faceteknik;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -32,6 +34,8 @@ public class Tab4Friend extends Fragment {
     private Tab4Adapter adapter;
     private ArrayList<Friends> mFriendList;
     private String JSON_STRING;
+
+    private Button addFriend;
 
     public Tab4Friend() {
         // Required empty public constructor
@@ -62,6 +66,14 @@ public class Tab4Friend extends Fragment {
                     }
                 }
         );
+
+        addFriend = (Button) view.findViewById(R.id.buttonNFAddFriend);
+        addFriend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), AddFriend.class));
+            }
+        });
 
         return view;
     }

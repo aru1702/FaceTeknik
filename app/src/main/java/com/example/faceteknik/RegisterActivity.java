@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (fullname.isEmpty() || username.isEmpty() || email.isEmpty() || password.isEmpty()){
                     Toast.makeText(getApplicationContext(), "Please full fill all form needed!", Toast.LENGTH_SHORT).show();
                 } else {
-                    
+
                     // password must contains 6 character
                     if (Pattern.matches("\\w{6,}", password)) {
                         addUser(fullname, username, email, password, "", "");

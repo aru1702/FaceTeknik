@@ -21,20 +21,12 @@
             android:textAlignment="center" />
 
         <TextView
-            android:id="@+id/tanggallahir"
-            android:layout_width="match_parent"
-            android:layout_height="62dp"
-            android:gravity="center"
-            android:text="Tanggal Lahir"
-            android:textAlignment="center"/>
-
-        <TextView
             android:id="@+id/email"
             android:layout_width="429dp"
             android:layout_height="59dp"
             android:gravity="center"
             android:text="E-mail"
-            android:textAlignment="center"/>
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/username"
@@ -42,7 +34,7 @@
             android:layout_height="59dp"
             android:gravity="center"
             android:text="Username"
-            android:textAlignment="center"/>
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/bio"
@@ -50,7 +42,7 @@
             android:layout_height="59dp"
             android:gravity="center"
             android:text="Bio"
-            android:textAlignment="center"/>
+            android:textAlignment="center" />
 
     </LinearLayout>
 

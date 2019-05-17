@@ -2,6 +2,7 @@ package com.example.faceteknik;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,13 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
-import com.example.faceteknik.API.Post;
 import com.example.faceteknik.API.TextPost;
 import com.example.faceteknik.Database.Configuration;
 import com.example.faceteknik.Database.RequestHandler;
@@ -39,10 +39,11 @@ public class Tab2Newsfeed extends Fragment {
     private ArrayList<TextPost> mPostList;
     private String JSON_STRING;
 
+    private Button buttonAddPost;
+
     public Tab2Newsfeed() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -82,6 +83,15 @@ public class Tab2Newsfeed extends Fragment {
                     }
                 }
         );
+
+        buttonAddPost = (Button) view.findViewById(R.id.buttonNFAddFriend);
+
+        buttonAddPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), PostingActivity.class));
+            }
+        });
 
         return view;
     }
