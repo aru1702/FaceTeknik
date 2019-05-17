@@ -24,49 +24,10 @@ public class Tab3Profile extends Fragment {
         // Required empty public constructor
     }
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab3_profile, container, false);
-        // Inflate the layout for this fragment
-        String[] awayStrings = {
-                "ini profile",
-                "cook",
-                "Sunset",
-                "MidMorning",
-                "Good Morning",
-                "Breakfast",
-                "MidMorning",
-                "Lunch",
-                "Afternoon",
-                "Sunset",
-                "Supper Time",
-                "Lunch",
-                "Afternoon",
-                "Supper Time",
-                "Lovely Night",
-                "Chilly Dreams"
-        };
-
-        ListView lv = (ListView) view.findViewById(R.id.listView3);
-
-        ArrayAdapter<String> lva = new ArrayAdapter<String>(
-                getActivity(), android.R.layout.simple_list_item_1, awayStrings);
-        lv.setAdapter(lva);
-
-        final SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.fragment_tab3_profile);
-
-        mSwipeRefreshLayout.setOnRefreshListener(
-                new SwipeRefreshLayout.OnRefreshListener() {
-                    @Override
-                    public void onRefresh() {
-                        ((Menu) getActivity()).refreshNow();
-                        Toast.makeText(getContext(), "Refresh Layout working", Toast.LENGTH_LONG).show();
-                    }
-                }
-        );
 
         return view;
     }

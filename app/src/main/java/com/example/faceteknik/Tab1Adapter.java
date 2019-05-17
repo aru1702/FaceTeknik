@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.faceteknik.API.Notification;
@@ -16,29 +17,35 @@ import java.util.List;
 public class Tab1Adapter extends ArrayAdapter {
 
     private Context mContext;
-    private ArrayList<Notification> mFriendList;
+    private ArrayList<Notification> mNotificationList;
 
-    public Tab1Adapter(Context mContext, ArrayList<Notification> mFriendList) {
-        super(mContext, 0, mFriendList);
+    public Tab1Adapter(Context mContext, ArrayList<Notification> mNotificationList) {
+        super(mContext, 0, mNotificationList);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        Notification friends = (Notification) getItem(position);
+        Notification notification = (Notification) getItem(position);
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).
-                    inflate(R.layout.tab4_list, parent, false);
+                    inflate(R.layout.tab1_list, parent, false);
         }
 
-//        TextView tvUsername = (TextView)convertView.findViewById(R.id.username);
-//        TextView tvBio = (TextView)convertView.findViewById(R.id.bio);
-//
-//        tvUsername.setText(friends.getUsername());
-//        tvBio.setText(friends.getBiodata());
+        TextView tvUsername = (TextView)convertView.findViewById(R.id.username);
+        TextView tvDate = (TextView)convertView.findViewById(R.id.date);
+        TextView tvStatus = (TextView)convertView.findViewById(R.id.status);
 
-        convertView.setTag(friends.getId());
+        tvUsername.setText(notification.getUserPost());
+        tvDate.setText(notification.getDate());
+
+        if(notification.isAlreadyRead())
+            tvStatus.setText("Already Read");
+        else
+            tvStatus.setText("New Post!1!1!1!");
+
+        convertView.setTag(notification.getId());
 
         return convertView;
     }

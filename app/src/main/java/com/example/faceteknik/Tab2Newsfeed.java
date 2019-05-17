@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import com.example.faceteknik.API.Post;
 import com.example.faceteknik.Database.Configuration;
 import com.example.faceteknik.Database.RequestHandler;
 
@@ -31,7 +32,9 @@ import java.util.HashMap;
  */
 public class Tab2Newsfeed extends Fragment {
 
-    private ListView listView;
+    private ListView lvPost;
+    private Tab2Adapter adapter;
+    private ArrayList<Post> mPostList;
     private String JSON_STRING;
 
     public Tab2Newsfeed() {
@@ -44,22 +47,26 @@ public class Tab2Newsfeed extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab2_newsfeed, container, false);
 
-//        getJSON();
-
-        ListView lv = (ListView) view.findViewById(R.id.listView2);
-        listView = lv;
-
-        final SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.fragment_tab2_newsfeed);
-
-        mSwipeRefreshLayout.setOnRefreshListener(
-                new SwipeRefreshLayout.OnRefreshListener() {
-                    @Override
-                    public void onRefresh() {
-                        ((Menu) getActivity()).refreshNow();
-                        Toast.makeText(getContext(), "Refresh Layout working", Toast.LENGTH_LONG).show();
-                    }
-                }
-        );
+//        mPostList = new ArrayList<>();
+//
+//        mPostList.add(new Post(1));
+//
+//        getJSON(1);
+//
+//        ListView lv = (ListView)view.findViewById(R.id.listView4);
+//        lvFriend = lv;
+//
+//        final SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.fragment_tab4_friend);
+//
+//        mSwipeRefreshLayout.setOnRefreshListener(
+//                new SwipeRefreshLayout.OnRefreshListener() {
+//                    @Override
+//                    public void onRefresh() {
+//                        ((Menu) getActivity()).refreshNow();
+//                        Toast.makeText(getContext(), "Refresh Layout working", Toast.LENGTH_LONG).show();
+//                    }
+//                }
+//        );
 
         return view;
     }
@@ -97,7 +104,7 @@ public class Tab2Newsfeed extends Fragment {
                 new String[]{Configuration.KEY_ID,Configuration.KEY_FULLNAME},
                 new int[]{R.id.id, R.id.name});
 
-        listView.setAdapter(adapter);
+//        listView.setAdapter(adapter);
     }
 
     private void getJSON(){
