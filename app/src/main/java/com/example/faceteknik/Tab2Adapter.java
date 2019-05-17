@@ -5,42 +5,44 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.faceteknik.API.Friends;
-
-import org.w3c.dom.Text;
+import com.example.faceteknik.API.Post;
+import com.example.faceteknik.API.TextPost;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Tab2Adapter extends ArrayAdapter {
 
     private Context mContext;
-    private ArrayList<Friends> mFriendList;
+    private ArrayList<TextPost> mPostList;
 
-    public Tab2Adapter(Context mContext, ArrayList<Friends> mFriendList) {
-        super(mContext, 0, mFriendList);
+    public Tab2Adapter(Context mContext, ArrayList<TextPost> mPostList) {
+        super(mContext, 0, mPostList);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        Friends friends = (Friends) getItem(position);
+        TextPost post = (TextPost) getItem(position);
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).
-                    inflate(R.layout.tab4_list, parent, false);
+                    inflate(R.layout.tab2_list, parent, false);
         }
 
-        TextView tvUsername = (TextView)convertView.findViewById(R.id.username);
-        TextView tvBio = (TextView)convertView.findViewById(R.id.bio);
+        TextView tvUsername = (TextView)convertView.findViewById(R.id.postUsername);
+        TextView tvDate = (TextView)convertView.findViewById(R.id.postDate);
+        TextView tvText = (TextView)convertView.findViewById(R.id.postText);
+        ImageView tvImage = (ImageView) convertView.findViewById(R.id.postImage);
 
-        tvUsername.setText(friends.getUsername());
-        tvBio.setText(friends.getBiodata());
+        tvUsername.setText(post.getUsername());
+        tvDate.setText(post.getDate());
+        tvText.setText(post.getTextContent());
+        tvImage.setImageResource(R.drawable.logo);
 
-        convertView.setTag(friends.getId());
+        convertView.setTag(post.getId());
 
         return convertView;
     }

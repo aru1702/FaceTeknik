@@ -7,49 +7,46 @@
     tools:context=".Tab3Profile">
 
 
-    <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
         android:id="@+id/fullname"
         android:layout_width="157dp"
         android:layout_height="59dp"
-        android:gravity="center"
-        android:text="Full Name"
-        tools:layout_editor_absoluteX="127dp"
-        tools:layout_editor_absoluteY="103dp" />
+            android:gravity="center"
+        android:text="Full Name" />
 
-    <TextView
-        android:id="@+id/tanggallahir"
-        android:layout_width="157dp"
-        android:layout_height="59dp"
-        android:gravity="center"
-        android:text="Tanggal Lahir"
-        tools:layout_editor_absoluteX="127dp"
-        tools:layout_editor_absoluteY="375dp" />
+        <TextView
+            android:id="@+id/tanggallahir"
+            android:layout_width="158dp"
+            android:layout_height="62dp"
+            android:gravity="center"
+            android:text="Tanggal Lahir" />
 
-    <TextView
-        android:id="@+id/email"
-        android:layout_width="157dp"
-        android:layout_height="59dp"
-        android:gravity="center"
-        android:text="E-mail"
-        tools:layout_editor_absoluteX="127dp"
-        tools:layout_editor_absoluteY="285dp" />
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="157dp"
+            android:layout_height="59dp"
+            android:gravity="center"
+            android:text="E-mail" />
 
-    <TextView
-        android:id="@+id/username"
-        android:layout_width="157dp"
-        android:layout_height="59dp"
-        android:gravity="center"
-        android:text="Username"
-        tools:layout_editor_absoluteX="127dp"
-        tools:layout_editor_absoluteY="201dp" />
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="157dp"
+            android:layout_height="59dp"
+            android:gravity="center"
+            android:text="Username" />
 
-    <TextView
-        android:id="@+id/bio"
-        android:layout_width="157dp"
-        android:layout_height="59dp"
-        android:gravity="center"
-        android:text="Bio"
-        tools:layout_editor_absoluteX="127dp"
-        tools:layout_editor_absoluteY="471dp" />
+        <TextView
+            android:id="@+id/bio"
+            android:layout_width="157dp"
+            android:layout_height="59dp"
+            android:gravity="center"
+            android:text="Bio" />
+
+    </LinearLayout>
 
 </android.support.v4.widget.SwipeRefreshLayout>

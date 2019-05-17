@@ -9,6 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -16,6 +17,7 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.example.faceteknik.API.Post;
+import com.example.faceteknik.API.TextPost;
 import com.example.faceteknik.Database.Configuration;
 import com.example.faceteknik.Database.RequestHandler;
 
@@ -34,7 +36,7 @@ public class Tab2Newsfeed extends Fragment {
 
     private ListView lvPost;
     private Tab2Adapter adapter;
-    private ArrayList<Post> mPostList;
+    private ArrayList<TextPost> mPostList;
     private String JSON_STRING;
 
     public Tab2Newsfeed() {
@@ -47,26 +49,39 @@ public class Tab2Newsfeed extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab2_newsfeed, container, false);
 
-//        mPostList = new ArrayList<>();
-//
-//        mPostList.add(new Post(1));
-//
+        mPostList = new ArrayList<>();
+
+        mPostList.add(new TextPost(1, "a", "aaa", "isisisisisisisi", "bbb"));
+        mPostList.add(new TextPost(2, "a", "aaa", "isisisisisisisi", "bbb"));
+        mPostList.add(new TextPost(3, "a", "aaa", "isisisisisisisi", "bbb"));
+        mPostList.add(new TextPost(4, "a", "aaa", "isisisisisisisi", "bbb"));
+        mPostList.add(new TextPost(5, "a", "aaa", "isisisisisisisi", "bbb"));
+        mPostList.add(new TextPost(6, "a", "aaa", "isisisisisisisi", "bbb"));
+
 //        getJSON(1);
-//
-//        ListView lv = (ListView)view.findViewById(R.id.listView4);
-//        lvFriend = lv;
-//
-//        final SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.fragment_tab4_friend);
-//
-//        mSwipeRefreshLayout.setOnRefreshListener(
-//                new SwipeRefreshLayout.OnRefreshListener() {
-//                    @Override
-//                    public void onRefresh() {
-//                        ((Menu) getActivity()).refreshNow();
-//                        Toast.makeText(getContext(), "Refresh Layout working", Toast.LENGTH_LONG).show();
-//                    }
-//                }
-//        );
+
+        ListView lv = (ListView)view.findViewById(R.id.listView2);
+        Tab2Adapter adapter = new Tab2Adapter(getActivity(), mPostList);
+        lv.setAdapter(adapter);
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getActivity(), "Clicked =" + view.getTag(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        final SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.fragment_tab2_newsfeed);
+
+        mSwipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        ((Menu) getActivity()).refreshNow();
+                        Toast.makeText(getContext(), "Refresh Layout working", Toast.LENGTH_LONG).show();
+                    }
+                }
+        );
 
         return view;
     }

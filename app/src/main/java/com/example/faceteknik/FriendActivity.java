@@ -68,7 +68,7 @@ public class FriendActivity extends Activity {
         ListAdapter adapter = new SimpleAdapter(
                 FriendActivity.this, list, R.layout.layout_listview_friendlist,
                 new String[]{Configuration.KEY_IMAGE,Configuration.KEY_FULLNAME,Configuration.KEY_TEXT,Configuration.KEY_DATE},
-                new int[]{R.id.postImage, R.id.postFullName, R.id.postText, R.id.postDate});
+                new int[]{R.id.postImage, R.id.postUsername, R.id.postText, R.id.postDate});
 
         listView.setAdapter(adapter);
     }

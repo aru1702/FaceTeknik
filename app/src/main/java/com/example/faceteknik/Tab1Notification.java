@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.media.Image;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -60,6 +61,13 @@ public class Tab1Notification extends Fragment {
 
         ListView lv = (ListView)view.findViewById(R.id.listView);
         lvNotification = lv;
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getActivity(), "Clicked =" + view.getTag(), Toast.LENGTH_LONG).show();
+            }
+        });
 
         final SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.fragment_tab1_notification);
 
