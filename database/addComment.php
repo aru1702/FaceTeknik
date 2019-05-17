@@ -8,13 +8,12 @@
 	if($_SERVER['REQUEST_METHOD']=='POST'){
 		
 		//Mendapatkan Nilai Variable
-		$id = $_POST['id'];
 		$idPost = $_POST['idPost'];
 		$idUser = $_POST['idUser'];
 		$comment = $_POST['comment'];
 		
 		//Pembuatan Syntax SQL
-		$sql = "INSERT INTO comment (id, idPost, idUser, comment) VALUES ('$id', '$idPost' ,'$idUser' ,'$comment')";
+		$sql = "INSERT INTO comment (idPost, idUser, comment) VALUES ('$idPost' ,'$idUser' ,'$comment')";
 		
 		//Import File Koneksi database
 		require_once('connection.php');

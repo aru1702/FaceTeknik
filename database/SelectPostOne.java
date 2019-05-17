@@ -9,7 +9,7 @@ implements ListView.OnItemClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tampil_semua_pgw);
 		
-        getJSON();
+        getJSON(id);
     }
 
 
@@ -42,7 +42,7 @@ implements ListView.OnItemClickListener{
         }
     }
 
-    private void getJSON(){
+    private void getJSON(int id){
         class GetJSON extends AsyncTask<Void,Void,String>{
 
             ProgressDialog loading;
@@ -63,7 +63,7 @@ implements ListView.OnItemClickListener{
             @Override
             protected String doInBackground(Void... params) {
                 RequestHandler rh = new RequestHandler();
-                String s = rh.sendGetRequest(Configuration.URL_GET_POST_ONE);
+                String s = rh.sendGetRequestParam(Configuration.URL_GET_POST_ONE, Integer.toString(id));
                 return s;
             }
         }

@@ -7,11 +7,12 @@
  
  */
 
+	
 	//Import File Koneksi Database
 	require_once('connection.php');
 	
 	//Membuat SQL Query
-	$sql = "SELECT netizen.id, fullName, netizen.date, comment FROM user INNER JOIN (SELECT comment.id as id, comment.idUser, comment.date, comment from post INNER JOIN comment ON post.id = comment.idPost) as netizen ON user.id = netizen.idUser;";
+	$sql = "SELECT netizen.id, fullName, netizen.date, comment FROM user INNER JOIN (SELECT comment.id as id, post.id as idPost, comment.idUser, comment.date, comment from post INNER JOIN comment ON post.id = comment.idPost) as netizen ON user.id = netizen.idUser;";
 	
 	//Mendapatkan Hasil
 	$r = mysqli_query($con,$sql);

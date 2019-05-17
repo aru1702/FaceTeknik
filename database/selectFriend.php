@@ -11,7 +11,7 @@
 	require_once('connection.php');
 	
 	//Membuat SQL Query
-	$sql = "SELECT idUser, userName, bio FROM friendlist INNER JOIN user ON friendlist.idUser = user.id;";
+	$sql = "SELECT idUser, idFriend, userName, bio FROM friendlist INNER JOIN user ON friendlist.idFriend = user.id;";
 	
 	//Mendapatkan Hasil
 	$r = mysqli_query($con,$sql);
@@ -24,6 +24,7 @@
 		//Memasukkan data kedalam Array Kosong yang telah dibuat 
 		array_push($result,array(
 			"idUser"=>$row['idUser'],
+			"idFriend"=>$row['idFriend'],
 			"userName"=>$row['userName'],
 			"bio"=>$row['bio']
 		));

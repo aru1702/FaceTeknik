@@ -11,13 +11,12 @@
 		$text = NULL;
 		
 		//Mendapatkan Nilai Variable
-		$id = $_POST['id'];
 		$idUser = $_POST['idUser'];
 		$image = $_POST['image'];
 		$text = $_POST['text'];
 		
 		//Pembuatan Syntax SQL
-		$sql = "INSERT INTO post (id, idUser, image, text) VALUES ('$id', '$idUser', '$image', '$text')";
+		$sql = "INSERT INTO post (idUser, image, text) VALUES ('$idUser', '$image', '$text')";
 		
 		//Import File Koneksi database
 		require_once('connection.php');

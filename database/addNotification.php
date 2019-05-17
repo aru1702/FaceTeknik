@@ -8,11 +8,10 @@
 	if($_SERVER['REQUEST_METHOD']=='POST'){
 		
 		//Mendapatkan Nilai Variable
-		$id = $_POST['id'];
 		$idPost = $_POST['idPost'];
 		
 		//Pembuatan Syntax SQL
-		$sql = "INSERT INTO notification (id, idPost) VALUES ('$id',' $idPost')";
+		$sql = "INSERT INTO notification (idPost) VALUES ('$idPost')";
 		
 		//Import File Koneksi database
 		require_once('connection.php');
