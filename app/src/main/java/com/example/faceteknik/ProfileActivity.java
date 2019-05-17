@@ -35,7 +35,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_tab4);
+        setContentView(R.layout.fragment_tab3_profile);
         
         final TextView fullname = (TextView) findViewById(R.id.fullname);
         final TextView username = (TextView) findViewById(R.id.username);
