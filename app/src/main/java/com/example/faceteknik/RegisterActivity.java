@@ -14,30 +14,24 @@ import com.example.faceteknik.Database.Configuration;
 import com.example.faceteknik.Database.RequestHandler;
 
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
-
-    public static String fullName;
-    public static String userName;
-    public static String email;
-    public static String password;
-    public static String tanggalLahir;
-    public static String bio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        final EditText fullnameRegister =(EditText)findViewById(R.id.fullname);
-        final EditText usernameRegister = (EditText) findViewById(R.id.username);
-        final EditText emailRegister = (EditText) findViewById(R.id.email);
-        final EditText passwordRegister = (EditText) findViewById(R.id.password);
+        final EditText fullnameRegister =(EditText)findViewById(R.id.fullnameRegister);
+        final EditText usernameRegister = (EditText) findViewById(R.id.usernameRegister);
+        final EditText emailRegister = (EditText) findViewById(R.id.emailRegister);
+        final EditText passwordRegister = (EditText) findViewById(R.id.passwordRegister);
 //        final EditText lahirRegister = (EditText) findViewById(R.id.lahir);
 //        final EditText bioRegister = (EditText) findViewById(R.id.bio);
 
         final Button buttonRegister = (Button) findViewById(R.id.signup);
-        final Button buttonHome = (Button) findViewById(R.id.login);
+        final Button buttonLogin = (Button) findViewById(R.id.login);
 
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,52 +45,50 @@ public class RegisterActivity extends AppCompatActivity {
 
 //                RegisterRequest temp = new RegisterRequest(fullname, username, email, password, lahir, bio);
 
-                Intent mainMenuIntent = new Intent(RegisterActivity.this, Menu.class);
-                startActivity(mainMenuIntent);
+                // check if input is null
+                if (fullname.isEmpty() || username.isEmpty() || email.isEmpty() || password.isEmpty()){
+                    Toast.makeText(getApplicationContext(), "Please full fill all form needed!", Toast.LENGTH_SHORT).show();
+                } else {
+                    
+                    // password must contains 6 character
+                    if (Pattern.matches("\\w{6,}", password)) {
+                        addUser(fullname, username, email, password, "", "");
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Password less than 6 characters!", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
 
-        buttonHome.setOnClickListener(new View.OnClickListener() {
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mainMenuIntent = new Intent(RegisterActivity.this, Menu.class);
-                startActivity(mainMenuIntent);
+                finish();
             }
         });
 
     }
 
-    private void addUser(String fullName, String userName, String email, String password, String tanggalLahir, String bio){
+    private void addUser(final String fullName,final String userName, final String email, final String password, final String tanggalLahir, final String bio){
 
-        this.fullName = fullName;
-        this.userName = userName;
-        this.email = email;
-        this.password = password;
-        this.tanggalLahir = tanggalLahir;
-        this.bio = bio;
 
         class AddUser extends AsyncTask<Void,Void,String>{
 
-            String fullName = RegisterActivity.fullName;
-            String userName = RegisterActivity.userName;
-            String email = RegisterActivity.email;
-            String password = RegisterActivity.password;
-            String tanggalLahir = RegisterActivity.tanggalLahir;
-            String bio = RegisterActivity.bio;
 
             ProgressDialog loading;
 
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                loading = ProgressDialog.show(RegisterActivity.this,"Menambahkan Friend...","",false);
+                loading = ProgressDialog.show(RegisterActivity.this,"Mohon tunggu...","",false);
             }
 
             @Override
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 loading.dismiss();
-                Toast.makeText(RegisterActivity.this,s,Toast.LENGTH_LONG).show();
+                // Toast.makeText(AddUserDatabase.this,s,Toast.LENGTH_LONG).show();
+                finish();
             }
 
             @Override

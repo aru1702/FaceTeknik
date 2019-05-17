@@ -13,39 +13,44 @@
         android:orientation="vertical">
 
         <TextView
-        android:id="@+id/fullname"
-        android:layout_width="157dp"
-        android:layout_height="59dp"
+            android:id="@+id/fullname"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
             android:gravity="center"
-        android:text="Full Name" />
+            android:text="Full Name"
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/tanggallahir"
-            android:layout_width="158dp"
+            android:layout_width="match_parent"
             android:layout_height="62dp"
             android:gravity="center"
-            android:text="Tanggal Lahir" />
+            android:text="Tanggal Lahir"
+            android:textAlignment="center"/>
 
         <TextView
             android:id="@+id/email"
-            android:layout_width="157dp"
+            android:layout_width="429dp"
             android:layout_height="59dp"
             android:gravity="center"
-            android:text="E-mail" />
+            android:text="E-mail"
+            android:textAlignment="center"/>
 
         <TextView
             android:id="@+id/username"
-            android:layout_width="157dp"
+            android:layout_width="424dp"
             android:layout_height="59dp"
             android:gravity="center"
-            android:text="Username" />
+            android:text="Username"
+            android:textAlignment="center"/>
 
         <TextView
             android:id="@+id/bio"
-            android:layout_width="157dp"
+            android:layout_width="match_parent"
             android:layout_height="59dp"
             android:gravity="center"
-            android:text="Bio" />
+            android:text="Bio"
+            android:textAlignment="center"/>
 
     </LinearLayout>
 
