@@ -84,8 +84,7 @@ public class Tab2Newsfeed extends Fragment {
                 }
         );
 
-        buttonAddPost = (Button) view.findViewById(R.id.buttonNFAddFriend);
-
+        buttonAddPost = (Button) view.findViewById(R.id.addpostbtn_fragment_tab2_newsfeed);
         buttonAddPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

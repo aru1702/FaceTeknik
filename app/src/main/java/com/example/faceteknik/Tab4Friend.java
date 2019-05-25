@@ -47,16 +47,14 @@ public class Tab4Friend extends Fragment {
         View view = inflater.inflate(R.layout.fragment_tab4_friend, container, false);
 
         mFriendList = new ArrayList<>();
-
         mFriendList.add(new Friends(1, "a", "aaa"));
 
-        getJSON(1);
+//        getJSON(1);
 
         ListView lv = (ListView)view.findViewById(R.id.listView4);
         lvFriend = lv;
 
         final SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.fragment_tab4_friend);
-
         mSwipeRefreshLayout.setOnRefreshListener(
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override

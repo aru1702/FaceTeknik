@@ -14,10 +14,14 @@
 
 
         <Button
-            android:id="@+id/buttonNFAddFriend"
+            android:id="@+id/addpostbtn_fragment_tab2_newsfeed"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add Post" />
+            android:layout_height="50dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/addpostbtn" />
 
         <ListView
             android:id="@+id/listView2"

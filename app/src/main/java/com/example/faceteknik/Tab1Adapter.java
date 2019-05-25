@@ -33,9 +33,9 @@ public class Tab1Adapter extends ArrayAdapter {
                     inflate(R.layout.tab1_list, parent, false);
         }
 
-        TextView tvUsername = (TextView)convertView.findViewById(R.id.username);
-        TextView tvDate = (TextView)convertView.findViewById(R.id.date);
-        TextView tvStatus = (TextView)convertView.findViewById(R.id.status);
+        TextView tvUsername = (TextView)convertView.findViewById(R.id.username_tab1_list);
+        TextView tvDate = (TextView)convertView.findViewById(R.id.date_tab1_list);
+        TextView tvStatus = (TextView)convertView.findViewById(R.id.status_tab1_list);
 
         tvUsername.setText(notification.getUserPost());
         tvDate.setText(notification.getDate());

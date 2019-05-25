@@ -36,12 +36,11 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_tab3_profile);
-        
-        final TextView fullname = (TextView) findViewById(R.id.fullname);
-        final TextView username = (TextView) findViewById(R.id.username);
-        final TextView tanggalLahir = (TextView) findViewById(R.id.tanggallahir);
-        final TextView email = (TextView) findViewById(R.id.email);
-        final TextView bio = (TextView) findViewById(R.id.bio);
+
+        final TextView fullname = (TextView) findViewById(R.id.fullname_activity_profile);
+        final TextView username = (TextView) findViewById(R.id.username_activity_profile);
+        final TextView email = (TextView) findViewById(R.id.email_activity_profile);
+        final TextView bio = (TextView) findViewById(R.id.bio_activity_profile);
 
         // call getJson to get user identity
         getJSON();
@@ -49,7 +48,6 @@ public class ProfileActivity extends AppCompatActivity {
         // display identity in activity
         fullname.setText(myUser.getFullname());
         username.setText(myUser.getUsername());
-        tanggalLahir.setText(myUser.getTanggalLahir());
         email.setText(myUser.getEmail());
         bio.setText(myUser.getBio());
     }

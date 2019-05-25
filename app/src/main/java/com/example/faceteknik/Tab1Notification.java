@@ -57,7 +57,7 @@ public class Tab1Notification extends Fragment {
 
         mNotificationList.add(new Notification(1, "a", "aaa", true));
 
-        getJSON();
+//        getJSON();
 
         ListView lv = (ListView)view.findViewById(R.id.listView);
         lvNotification = lv;

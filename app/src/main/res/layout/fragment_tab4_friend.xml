@@ -13,9 +13,14 @@
 
         <Button
             android:id="@+id/buttonNFAddFriend"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add Friend" />
+            android:layout_width="334dp"
+            android:layout_height="44dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/addfriendbtn" />
 
         <ListView
             android:id="@+id/listView4"
