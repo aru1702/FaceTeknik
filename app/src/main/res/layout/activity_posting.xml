@@ -11,7 +11,7 @@
     <EditText
         android:id="@+id/textPosting"
         android:layout_width="270dp"
-        android:layout_height="350dp"
+        android:layout_height="250dp"
         android:layout_marginTop="60dp"
         android:ems="10"
         android:fontFamily="@font/open_sans"
@@ -35,55 +35,8 @@
         android:background="@drawable/makepostbtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sticker2" />
+        app:layout_constraintTop_toBottomOf="@+id/stiker2" />
 
-    <ImageView
-        android:id="@+id/sticker1"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="30dp"
-        android:contentDescription="TODO"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textPosting"
-        app:srcCompat="@android:color/holo_blue_bright"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <ImageView
-        android:id="@+id/sticker2"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
-        android:contentDescription="TODO"
-        app:layout_constraintLeft_toRightOf="@+id/sticker1"
-        app:layout_constraintTop_toBottomOf="@+id/textPosting"
-        app:srcCompat="@android:color/holo_green_light"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <ImageView
-        android:id="@+id/sticker3"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
-        android:contentDescription="TODO"
-        app:layout_constraintLeft_toRightOf="@+id/sticker2"
-        app:layout_constraintTop_toBottomOf="@+id/textPosting"
-        app:srcCompat="@android:color/holo_purple"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <ImageView
-        android:id="@+id/sticker4"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
-        android:contentDescription="TODO"
-        app:layout_constraintLeft_toRightOf="@+id/sticker3"
-        app:layout_constraintTop_toBottomOf="@+id/textPosting"
-        app:srcCompat="@android:color/holo_orange_light"
-        tools:srcCompat="@tools:sample/avatars" />
 
     <Button
         android:id="@+id/gotoHomePosting"
@@ -100,30 +53,27 @@
     <Button
         android:id="@+id/stiker1"
         android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_height="100dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="28dp"
-        android:text="Button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textPosting" />
 
     <Button
         android:id="@+id/stiker2"
         android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_height="100dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="28dp"
-        android:text="Button"
         app:layout_constraintStart_toEndOf="@+id/stiker1"
         app:layout_constraintTop_toBottomOf="@+id/textPosting" />
 
     <Button
         android:id="@+id/stiker3"
         android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_height="100dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="28dp"
-        android:text="Button"
         app:layout_constraintStart_toEndOf="@+id/stiker2"
         app:layout_constraintTop_toBottomOf="@+id/textPosting" />
 
@@ -133,7 +83,6 @@
         android:layout_height="75dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="28dp"
-        android:text="Button"
         app:layout_constraintStart_toEndOf="@+id/stiker3"
         app:layout_constraintTop_toBottomOf="@+id/textPosting" />
 

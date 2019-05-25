@@ -2,6 +2,7 @@ package com.example.faceteknik;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,6 +21,7 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.example.faceteknik.API.Notification;
+import com.example.faceteknik.API.Post;
 import com.example.faceteknik.Database.Configuration;
 import com.example.faceteknik.Database.RequestHandler;
 
@@ -40,6 +42,8 @@ public class Tab1Notification extends Fragment {
     private ArrayList<Notification> mNotificationList;
     private String JSON_STRING;
 
+    private int userID;
+
     public Tab1Notification() {
         // Required empty public constructor
     }
@@ -51,11 +55,9 @@ public class Tab1Notification extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab1_notification, container, false);
 
-
+        userID = getActivity().getIntent().getIntExtra("userID", 0);
 
         mNotificationList = new ArrayList<>();
-
-        mNotificationList.add(new Notification(1, "a", "aaa", true));
 
 //        getJSON();
 
@@ -66,6 +68,13 @@ public class Tab1Notification extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getActivity(), "Clicked =" + view.getTag(), Toast.LENGTH_LONG).show();
+
+                //DATABASE ALREADY READ//
+
+                Intent intent = new Intent(getActivity(), Post.class);
+                intent.putExtra("userID", userID);
+                intent.putExtra("postID", (int) view.getTag());
+                startActivity(intent);
             }
         });
 
@@ -97,13 +106,6 @@ public class Tab1Notification extends Fragment {
                 String fullName = jo.getString(Configuration.KEY_FULLNAME);
                 String date = jo.getString(Configuration.KEY_DATE);
                 String alreadyRead = jo.getString(Configuration.KEY_ALREADY_READ);
-
-                //    HashMap<String,String> data = new HashMap<>();
-                //    data.put(Configuration.KEY_ID, id);
-                //    data.put(Configuration.KEY_FULLNAME, fullName);
-                //    data.put(Configuration.KEY_DATE, date);
-                //    data.put(Configuration.KEY_ALREADY_READ, alreadyRead);
-                //    list.add(data);
                 mNotificationList.add(new Notification(id, fullName, date, Boolean.valueOf(alreadyRead)));
             }
 

@@ -1,6 +1,7 @@
 package com.example.faceteknik;
 
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -10,6 +11,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListAdapter;
@@ -17,6 +19,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import com.example.faceteknik.API.Post;
 import com.example.faceteknik.API.TextPost;
 import com.example.faceteknik.Database.Configuration;
 import com.example.faceteknik.Database.RequestHandler;
@@ -39,7 +42,10 @@ public class Tab2Newsfeed extends Fragment {
     private ArrayList<TextPost> mPostList;
     private String JSON_STRING;
 
+    public static int scrollPosition;
     private Button buttonAddPost;
+
+    private int userID;
 
     public Tab2Newsfeed() {
         // Required empty public constructor
@@ -50,16 +56,13 @@ public class Tab2Newsfeed extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab2_newsfeed, container, false);
 
+        userID = getActivity().getIntent().getIntExtra("userID", 0);
+
         mPostList = new ArrayList<>();
 
-        mPostList.add(new TextPost(1, "a", "aaa", "isisisisisisisi", "bbb"));
-        mPostList.add(new TextPost(2, "a", "aaa", "isisisisisisisi", "bbb"));
-        mPostList.add(new TextPost(3, "a", "aaa", "isisisisisisisi", "bbb"));
-        mPostList.add(new TextPost(4, "a", "aaa", "isisisisisisisi", "bbb"));
-        mPostList.add(new TextPost(5, "a", "aaa", "isisisisisisisi", "bbb"));
-        mPostList.add(new TextPost(6, "a", "aaa", "isisisisisisisi", "bbb"));
+        mPostList.add(new TextPost(1, "a", "aaa", "isisisisisisisi", "Sticker1"));
 
-//        getJSON(1);
+//        getJSON();
 
         ListView lv = (ListView)view.findViewById(R.id.listView2);
         Tab2Adapter adapter = new Tab2Adapter(getActivity(), mPostList);
@@ -69,6 +72,11 @@ public class Tab2Newsfeed extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getActivity(), "Clicked =" + view.getTag(), Toast.LENGTH_LONG).show();
+
+                Intent postIntent = new Intent(getActivity() , PostActivity.class);
+                postIntent.putExtra("userID", userID);
+                postIntent.putExtra("postID", (int) view.getTag());
+                startActivity(postIntent);
             }
         });
 
@@ -84,11 +92,26 @@ public class Tab2Newsfeed extends Fragment {
                 }
         );
 
+        lv.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                Toast.makeText(getContext(),"first"+firstVisibleItem+"visible"+visibleItemCount+"total"+totalItemCount,Toast.LENGTH_SHORT).show();
+                Tab2Newsfeed.scrollPosition = firstVisibleItem;
+            }
+        });
+
         buttonAddPost = (Button) view.findViewById(R.id.addpostbtn_fragment_tab2_newsfeed);
         buttonAddPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), PostingActivity.class));
+                Intent addPostIntent = new Intent(getActivity() , PostingActivity.class);
+                addPostIntent.putExtra("userID", userID);
+                startActivity(addPostIntent);
             }
         });
 
@@ -104,29 +127,23 @@ public class Tab2Newsfeed extends Fragment {
 
             for(int i = 0; i<result.length(); i++){
                 JSONObject jo = result.getJSONObject(i);
-                String id = jo.getString(Configuration.KEY_ID);
+                int id = jo.getInt(Configuration.KEY_ID);
                 String fullName = jo.getString(Configuration.KEY_FULLNAME);
                 String date = jo.getString(Configuration.KEY_DATE);
                 String image = jo.getString(Configuration.KEY_IMAGE);
                 String text = jo.getString(Configuration.KEY_TEXT);
 
-                HashMap<String,String> data = new HashMap<>();
-                data.put(Configuration.KEY_ID, id);
-                data.put(Configuration.KEY_FULLNAME, fullName);
-                data.put(Configuration.KEY_DATE, date);
-                data.put(Configuration.KEY_IMAGE, image);
-                data.put(Configuration.KEY_TEXT, text);
-                list.add(data);
+                mPostList.add(new TextPost(id, fullName, date, image, text));
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        ListAdapter adapter = new SimpleAdapter(
-                getContext(), list, R.layout.post_template,
-                new String[]{Configuration.KEY_ID,Configuration.KEY_FULLNAME},
-                new int[]{R.id.id, R.id.name});
+//        ListAdapter adapter = new SimpleAdapter(
+//                getContext(), list, R.layout.post_template,
+//                new String[]{Configuration.KEY_ID,Configuration.KEY_FULLNAME},
+//                new int[]{R.id.id, R.id.name});
 
 //        listView.setAdapter(adapter);
     }

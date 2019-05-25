@@ -46,15 +46,15 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String email = usernameInput.getText().toString();
-                final String password = passwordInput.getText().toString();
+            final String email = usernameInput.getText().toString();
+            final String password = passwordInput.getText().toString();
 
-                getJSON(email, password);
+            getJSON(email, password);
 
-                // ver 2
-//                myEmail = usernameInput.getText().toString();
-//                myPassword = passwordInput.getText().toString();
-//                getJSON();
+            // ver 2
+//          myEmail = usernameInput.getText().toString();
+//          myPassword = passwordInput.getText().toString();
+//          getJSON();
             }
         });
 
@@ -100,8 +100,9 @@ public class LoginActivity extends AppCompatActivity {
                 editor.commit();
 
                 // go to dashboard
-                startActivity(new Intent(LoginActivity.this, Menu.class));
-                finish();
+                Intent mainIntent = new Intent(LoginActivity.this, Menu.class);
+                mainIntent.putExtra("userID", getId);
+                startActivity(mainIntent);
             } else {
                 Toast.makeText(getApplicationContext(), "Email or password is incorrect!", Toast.LENGTH_SHORT).show();
             }
@@ -139,76 +140,4 @@ public class LoginActivity extends AppCompatActivity {
         GetJSON gj = new GetJSON();
         gj.execute();
     }
-
-//    private void getJSON(){
-//        class GetJSON extends AsyncTask<Void,Void,String> {
-//
-//            ProgressDialog loading;
-//            @Override
-//            protected void onPreExecute() {
-//                super.onPreExecute();
-//                loading = ProgressDialog.show(LoginActivity.this,"Mengambil Data","Mohon Tunggu...",false,false);
-//            }
-//
-//            @Override
-//            protected void onPostExecute(String s) {
-//                super.onPostExecute(s);
-//                loading.dismiss();
-//                JSON_STRING = s;
-//                getUser();
-//            }
-//
-//            @Override
-//            protected String doInBackground(Void... params) {
-//                RequestHandler rh = new RequestHandler();
-//                String s = rh.sendGetRequest(Configuration.URL_LOGIN);
-//                return s;
-//            }
-//        }
-//        GetJSON gj = new GetJSON();
-//        gj.execute();
-//    }
-//
-//    private void getUser(){
-//        JSONObject jsonObject = null;
-//        boolean loginResult = false;
-//        ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String, String>>();
-//        try {
-//            System.out.println("Hasil JSON String: "+JSON_STRING);
-//            jsonObject = new JSONObject(JSON_STRING);
-//            JSONArray result = jsonObject.getJSONArray(Configuration.TAG_JSON_ARRAY);
-//
-//            for(int i = 0; i<result.length(); i++){
-//                JSONObject jo = result.getJSONObject(i);
-//                getId = jo.getString(Configuration.KEY_ID);
-//                String getEmail = jo.getString(Configuration.KEY_EMAIL);
-//                String getPassword = jo.getString(Configuration.KEY_PASSWORD);
-//
-//                if (getEmail == myEmail && getPassword == myPassword) {
-//                    loginResult = true;
-//                } else {
-//                    Toast.makeText(getApplicationContext(), "Email or password is incorrect!", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            if (loginResult == true) {
-//                // open shared preference
-//                sharedPreferences = getSharedPreferences(Configuration.STATIC_PREFERENCE, Context.MODE_PRIVATE);
-//                SharedPreferences.Editor editor = sharedPreferences.edit();
-//
-//                // put the value into the preference
-//                editor.putString(Configuration.STATIC_USER_ID, getId);
-//
-//                // commit the value (WRITE)
-//                editor.commit();
-//
-//                // go to dashboard
-//                startActivity(new Intent(LoginActivity.this, Menu.class));
-//                finish();
-//            }
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }

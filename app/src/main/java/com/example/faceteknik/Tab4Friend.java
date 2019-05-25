@@ -37,6 +37,8 @@ public class Tab4Friend extends Fragment {
 
     private Button addFriend;
 
+    private int userID;
+
     public Tab4Friend() {
         // Required empty public constructor
     }
@@ -45,6 +47,8 @@ public class Tab4Friend extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab4_friend, container, false);
+
+        userID = getActivity().getIntent().getIntExtra("userID", 0);
 
         mFriendList = new ArrayList<>();
         mFriendList.add(new Friends(1, "a", "aaa"));
@@ -69,7 +73,9 @@ public class Tab4Friend extends Fragment {
         addFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), AddFriend.class));
+                Intent addFriendIntent = new Intent(getActivity() , AddFriend.class);
+                addFriendIntent.putExtra("userID", userID);
+                startActivity(addFriendIntent);
             }
         });
 
@@ -91,11 +97,6 @@ public class Tab4Friend extends Fragment {
                 String userName = jo.getString(Configuration.KEY_USERNAME);
                 String bio = jo.getString(Configuration.KEY_BIO);
 
-                // HashMap<String,String> data = new HashMap<>();
-                // data.put(Configuration.KEY_ID_USER, idUser);
-                // data.put(Configuration.KEY_USERNAME, userName);
-                // data.put(Configuration.KEY_BIO, bio);
-                // list.add(data);
                 if(id == idUser)
                 {
                     mFriendList.add(new Friends(idFriend, userName, bio));

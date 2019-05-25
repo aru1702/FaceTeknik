@@ -18,10 +18,6 @@ import java.util.HashMap;
 
 public class PostingActivity extends AppCompatActivity {
 
-    public static String idUser;
-    public static String image;
-    public static String text;
-
     String stickerSelect = "Sticker1";
 
     @Override
@@ -38,10 +34,10 @@ public class PostingActivity extends AppCompatActivity {
         final Button sticker3 = (Button) findViewById(R.id.stiker3);
         final Button sticker4 = (Button) findViewById(R.id.stiker4);
 
-        sticker1.setBackgroundResource(R.drawable.splashscreen);
-        sticker2.setBackgroundResource(R.drawable.splashscreen);
-        sticker3.setBackgroundResource(R.drawable.splashscreen);
-        sticker4.setBackgroundResource(R.drawable.splashscreen);
+        sticker1.setBackgroundResource(R.drawable.sticker1);
+        sticker2.setBackgroundResource(R.drawable.sticker2);
+        sticker3.setBackgroundResource(R.drawable.sticker3);
+        sticker4.setBackgroundResource(R.drawable.sticker4);
 
         //PILIH STIKER//
 
@@ -50,34 +46,34 @@ public class PostingActivity extends AppCompatActivity {
             public void onClick(View v) {
                 stickerSelect = "Sticker1";
 
-                sticker1.setBackgroundResource(R.drawable.splashscreen);
-                sticker2.setBackgroundResource(R.drawable.logo);
-                sticker3.setBackgroundResource(R.drawable.logo);
-                sticker4.setBackgroundResource(R.drawable.logo);
+                sticker1.setBackgroundResource(R.drawable.sticker1);
+                sticker2.setBackgroundResource(R.drawable.sticker2);
+                sticker3.setBackgroundResource(R.drawable.sticker3);
+                sticker4.setBackgroundResource(R.drawable.sticker4);
             }
         });
 
         sticker2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stickerSelect = "Sticker1";
+                stickerSelect = "Sticker2";
 
-                sticker1.setBackgroundResource(R.drawable.logo);
-                sticker2.setBackgroundResource(R.drawable.splashscreen);
-                sticker3.setBackgroundResource(R.drawable.logo);
-                sticker4.setBackgroundResource(R.drawable.logo);
+                sticker1.setBackgroundResource(R.drawable.sticker1);
+                sticker2.setBackgroundResource(R.drawable.sticker2);
+                sticker3.setBackgroundResource(R.drawable.sticker3);
+                sticker4.setBackgroundResource(R.drawable.sticker4);
             }
         });
 
         sticker3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stickerSelect = "Sticker1";
+                stickerSelect = "Sticker3";
 
-                sticker1.setBackgroundResource(R.drawable.logo);
-                sticker2.setBackgroundResource(R.drawable.logo);
-                sticker3.setBackgroundResource(R.drawable.splashscreen);
-                sticker4.setBackgroundResource(R.drawable.logo);
+                sticker1.setBackgroundResource(R.drawable.sticker1);
+                sticker2.setBackgroundResource(R.drawable.sticker2);
+                sticker3.setBackgroundResource(R.drawable.sticker3);
+                sticker4.setBackgroundResource(R.drawable.sticker4);
             }
         });
 
@@ -85,12 +81,12 @@ public class PostingActivity extends AppCompatActivity {
         sticker4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stickerSelect = "Sticker1";
+                stickerSelect = "Sticker4";
 
-                sticker1.setBackgroundResource(R.drawable.logo);
-                sticker2.setBackgroundResource(R.drawable.logo);
-                sticker3.setBackgroundResource(R.drawable.logo);
-                sticker4.setBackgroundResource(R.drawable.splashscreen);
+                sticker1.setBackgroundResource(R.drawable.sticker1);
+                sticker2.setBackgroundResource(R.drawable.sticker2);
+                sticker3.setBackgroundResource(R.drawable.sticker3);
+                sticker4.setBackgroundResource(R.drawable.sticker4);
             }
         });
         //END PILIH STIKER//
@@ -98,9 +94,10 @@ public class PostingActivity extends AppCompatActivity {
         buttonPosting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String post = textPosting.getText().toString();
+                String post = textPosting.getText().toString();
 
                 //DATABASE//
+                addPost(1, stickerSelect, post);
 
                 Intent mainMenuIntent = new Intent(PostingActivity.this , Menu.class);
                 startActivity(mainMenuIntent);
@@ -116,19 +113,13 @@ public class PostingActivity extends AppCompatActivity {
         });
     }
 
-    private void addPost(int idUser, String image, String text){
+    private void addPost(final int idUser, final String image, final String text){
 
-        this.idUser = Integer.toString(idUser);
-        this.image = image;
-        this.text = text;
 
 
         class AddPost extends AsyncTask<Void,Void,String> {
 
             ProgressDialog loading;
-            String idUser = PostingActivity.idUser;
-            String image = PostingActivity.image;
-            String text = PostingActivity.text;
 
             @Override
             protected void onPreExecute() {
@@ -146,7 +137,7 @@ public class PostingActivity extends AppCompatActivity {
             @Override
             protected String doInBackground(Void... v) {
                 HashMap<String,String> params = new HashMap<>();
-                params.put(Configuration.KEY_ID_USER, idUser);
+                params.put(Configuration.KEY_ID_USER, Integer.toString(idUser));
                 params.put(Configuration.KEY_IMAGE, image);
                 params.put(Configuration.KEY_TEXT, text);
 
