@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.faceteknik.API.Post;
 import com.example.faceteknik.API.TextPost;
@@ -40,7 +41,19 @@ public class Tab2Adapter extends ArrayAdapter {
         tvUsername.setText(post.getUsername());
         tvDate.setText(post.getDate());
         tvText.setText(post.getTextContent());
-        tvImage.setImageResource(R.drawable.logo);
+
+        String sticker = post.getImageContent();
+
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"+ sticker);
+
+        if(sticker.equals("Sticker1"))
+            tvImage.setImageResource(R.drawable.sticker1);
+        else if(sticker.equals("Sticker2"))
+            tvImage.setImageResource(R.drawable.sticker2);
+        else if(sticker.equals("Sticker3"))
+            tvImage.setImageResource(R.drawable.sticker3);
+        else
+            tvImage.setImageResource(R.drawable.sticker4);
 
         convertView.setTag(post.getId());
 

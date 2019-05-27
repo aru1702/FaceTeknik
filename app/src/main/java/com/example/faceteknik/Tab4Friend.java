@@ -2,7 +2,9 @@ package com.example.faceteknik;
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -37,7 +39,7 @@ public class Tab4Friend extends Fragment {
 
     private Button addFriend;
 
-    private int userID;
+    private int currentId;
 
     public Tab4Friend() {
         // Required empty public constructor
@@ -48,17 +50,21 @@ public class Tab4Friend extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab4_friend, container, false);
 
-        userID = getActivity().getIntent().getIntExtra("userID", 0);
+        Intent intent = getActivity().getIntent();
+        if(intent.getExtras() != null)
+        {
+            currentId = intent.getExtras().getInt("currentId", 0);
+//            Toast.makeText(getActivity(), "currentId = " + currentId, Toast.LENGTH_LONG).show();
+        }
 
         mFriendList = new ArrayList<>();
-        mFriendList.add(new Friends(1, "a", "aaa"));
 
-//        getJSON(1);
+        getJSON(currentId);
 
         ListView lv = (ListView)view.findViewById(R.id.listView4);
         lvFriend = lv;
 
-        final SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.fragment_tab4_friend);
+        final SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.fragment_tab4_refresh);
         mSwipeRefreshLayout.setOnRefreshListener(
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
@@ -69,12 +75,13 @@ public class Tab4Friend extends Fragment {
                 }
         );
 
+        // add new friend button
         addFriend = (Button) view.findViewById(R.id.buttonNFAddFriend);
         addFriend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent addFriendIntent = new Intent(getActivity() , AddFriend.class);
-                addFriendIntent.putExtra("userID", userID);
+                addFriendIntent.putExtra("currentId", currentId);
                 startActivity(addFriendIntent);
             }
         });
@@ -82,7 +89,7 @@ public class Tab4Friend extends Fragment {
         return view;
     }
 
-    private void showFriend(int id){
+    private void showFriend(){
         JSONObject jsonObject = null;
         ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String, String>>();
         try {
@@ -92,15 +99,13 @@ public class Tab4Friend extends Fragment {
 
             for(int i = 0; i<result.length(); i++){
                 JSONObject jo = result.getJSONObject(i);
+
                 int idUser = jo.getInt(Configuration.KEY_ID_USER);
                 int idFriend = jo.getInt(Configuration.KEY_ID_FRIEND);
                 String userName = jo.getString(Configuration.KEY_USERNAME);
                 String bio = jo.getString(Configuration.KEY_BIO);
 
-                if(id == idUser)
-                {
-                    mFriendList.add(new Friends(idFriend, userName, bio));
-                }
+                mFriendList.add(new Friends(idFriend, userName, bio));
             }
 
         } catch (JSONException e) {
@@ -126,13 +131,13 @@ public class Tab4Friend extends Fragment {
                 super.onPostExecute(s);
                 loading.dismiss();
                 JSON_STRING = s;
-                showFriend(id);
+                showFriend();
             }
 
             @Override
             protected String doInBackground(Void... params) {
                 RequestHandler rh = new RequestHandler();
-                String s = rh.sendGetRequest(Configuration.URL_GET_FRIEND);
+                String s = rh.sendGetRequest(Configuration.URL_GET_FRIEND + "?id=" + id);
                 return s;
             }
         }

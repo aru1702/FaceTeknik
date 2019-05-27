@@ -11,19 +11,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".AddComment"></activity>
+        <activity android:name=".AddComment" >
+
+        </activity>
         <activity android:name=".AddFriend" />
-        <activity android:name=".UserActivity" />
         <activity android:name=".Menu">
+
+        </activity>
+        <activity android:name=".CommentActivity" />
+        <activity android:name=".PostingActivity" />
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CommentActivity" />
-        <activity android:name=".PostingActivity" />
-        <activity android:name=".SplashScreen"></activity>
         <activity android:name=".PostActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />

@@ -6,12 +6,13 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.faceteknik.Database.Configuration;
 
 public class SplashScreen extends AppCompatActivity {
 
-    private String currentId;
+    private int currentId;
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -20,6 +21,7 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
 
         // get Id
+        //
         getFromPreference();
 
         // hold for 2 seconds
@@ -27,12 +29,12 @@ public class SplashScreen extends AppCompatActivity {
             @Override
             public void run() {
                 // make sure there is Id or not
-                if (currentId != null){
-                    startActivity(new Intent(SplashScreen.this, Menu.class));
-                    finish();
+                if (currentId != -1){
+                    Intent menuIntent = new Intent(SplashScreen.this, Menu.class);
+                    menuIntent.putExtra("currentId", currentId);
+                    startActivity(menuIntent);
                 } else {
                     startActivity(new Intent(SplashScreen.this, LoginActivity.class));
-                    finish();
                 }
             }
         }, 2000);
@@ -45,7 +47,7 @@ public class SplashScreen extends AppCompatActivity {
 
         // store value from preference into field
         if (sharedPreferences.contains(Configuration.STATIC_USER_ID)) {
-            currentId = sharedPreferences.getString(Configuration.STATIC_USER_ID, "");
+            currentId = Integer.valueOf(sharedPreferences.getString(Configuration.STATIC_USER_ID, "0"));
         } else {
             // Toast.makeText(getApplicationContext(), "No data is stored.", Toast.LENGTH_SHORT).show();
         }

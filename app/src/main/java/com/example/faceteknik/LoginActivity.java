@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private ListView listView;
     private String JSON_STRING;
-    private String getId;
+    private int getId;
 
     SharedPreferences sharedPreferences;
 
@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (getEmail.equals(email) && getPassword.equals(password)) {
                     loginResult = true;
-                    getId = jo.getString(Configuration.KEY_ID);
+                    getId = Integer.valueOf(jo.getString(Configuration.KEY_ID));
                 }
             }
 
@@ -94,14 +94,14 @@ public class LoginActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
 
                 // put the value into the preference
-                editor.putString(Configuration.STATIC_USER_ID, getId);
+                editor.putString(Configuration.STATIC_USER_ID, Integer.toString(getId));
 
                 // commit the value (WRITE)
                 editor.commit();
 
                 // go to dashboard
                 Intent mainIntent = new Intent(LoginActivity.this, Menu.class);
-                mainIntent.putExtra("userID", getId);
+                mainIntent.putExtra("currentId", getId);
                 startActivity(mainIntent);
             } else {
                 Toast.makeText(getApplicationContext(), "Email or password is incorrect!", Toast.LENGTH_SHORT).show();

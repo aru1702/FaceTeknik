@@ -1,5 +1,6 @@
 package com.example.faceteknik;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -19,6 +20,14 @@ public class Menu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+//        Intent intent = getIntent();
+//        if(intent.getExtras() != null)
+//        {
+//            intent.getExtras().getInt("currentId");
+//            Bundle data = new Bundle();//create bundle instance
+//            data.putString("currentId", "String to pass");//put string to pass with a key value
+//        }
 
         toolbar = (Toolbar) findViewById(R.id.toolBar);
         setSupportActionBar(toolbar);

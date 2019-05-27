@@ -13,6 +13,7 @@ public class Configuration {
 
     //PENTING! JANGAN LUPA GANTI IP SESUAI IP LOCALHOST
     public static final String IP="192.168.43.165";
+//    public static final String IP="192.168.1.11";
 
     //URL to send data to database
     public static final String URL_ADD_POST = "http://"+ IP +"/FaceTeknik/addPost.php";

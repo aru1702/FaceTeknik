@@ -1,8 +1,7 @@
 package com.example.faceteknik;
 
-
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -14,12 +13,9 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
-import com.example.faceteknik.API.Post;
 import com.example.faceteknik.API.TextPost;
 import com.example.faceteknik.Database.Configuration;
 import com.example.faceteknik.Database.RequestHandler;
@@ -45,7 +41,7 @@ public class Tab2Newsfeed extends Fragment {
     public static int scrollPosition;
     private Button buttonAddPost;
 
-    private int userID;
+    private int currentId;
 
     public Tab2Newsfeed() {
         // Required empty public constructor
@@ -56,17 +52,22 @@ public class Tab2Newsfeed extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab2_newsfeed, container, false);
 
-        userID = getActivity().getIntent().getIntExtra("userID", 0);
+        Intent intent = getActivity().getIntent();
+        if(intent.getExtras() != null)
+        {
+            currentId = intent.getExtras().getInt("currentId", 0);
+//            Toast.makeText(getActivity(), "currentId = " + currentId, Toast.LENGTH_LONG).show();
+        }
+
 
         mPostList = new ArrayList<>();
 
-        mPostList.add(new TextPost(1, "a", "aaa", "isisisisisisisi", "Sticker1"));
-
-//        getJSON();
+        getJSON(currentId);
 
         ListView lv = (ListView)view.findViewById(R.id.listView2);
-        Tab2Adapter adapter = new Tab2Adapter(getActivity(), mPostList);
-        lv.setAdapter(adapter);
+        lvPost = lv;
+
+
 
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -74,43 +75,30 @@ public class Tab2Newsfeed extends Fragment {
                 Toast.makeText(getActivity(), "Clicked =" + view.getTag(), Toast.LENGTH_LONG).show();
 
                 Intent postIntent = new Intent(getActivity() , PostActivity.class);
-                postIntent.putExtra("userID", userID);
-                postIntent.putExtra("postID", (int) view.getTag());
+                postIntent.putExtra("currentId", currentId);
+                postIntent.putExtra("postId", (int) view.getTag());
                 startActivity(postIntent);
             }
         });
 
-        final SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.fragment_tab2_newsfeed);
+        final SwipeRefreshLayout mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.fragment_tab2_refresh);
 
         mSwipeRefreshLayout.setOnRefreshListener(
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
                     public void onRefresh() {
                         ((Menu) getActivity()).refreshNow();
-                        Toast.makeText(getContext(), "Refresh Layout working", Toast.LENGTH_LONG).show();
+//                        Toast.makeText(getContext(), "Refresh", Toast.LENGTH_LONG).show();
                     }
                 }
         );
-
-        lv.setOnScrollListener(new AbsListView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-
-            }
-
-            @Override
-            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                Toast.makeText(getContext(),"first"+firstVisibleItem+"visible"+visibleItemCount+"total"+totalItemCount,Toast.LENGTH_SHORT).show();
-                Tab2Newsfeed.scrollPosition = firstVisibleItem;
-            }
-        });
 
         buttonAddPost = (Button) view.findViewById(R.id.addpostbtn_fragment_tab2_newsfeed);
         buttonAddPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent addPostIntent = new Intent(getActivity() , PostingActivity.class);
-                addPostIntent.putExtra("userID", userID);
+                addPostIntent.putExtra("currentId", currentId);
                 startActivity(addPostIntent);
             }
         });
@@ -133,22 +121,18 @@ public class Tab2Newsfeed extends Fragment {
                 String image = jo.getString(Configuration.KEY_IMAGE);
                 String text = jo.getString(Configuration.KEY_TEXT);
 
-                mPostList.add(new TextPost(id, fullName, date, image, text));
+                mPostList.add(new TextPost(id, fullName, date, text, image));
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-//        ListAdapter adapter = new SimpleAdapter(
-//                getContext(), list, R.layout.post_template,
-//                new String[]{Configuration.KEY_ID,Configuration.KEY_FULLNAME},
-//                new int[]{R.id.id, R.id.name});
-
-//        listView.setAdapter(adapter);
+        adapter = new Tab2Adapter(getActivity(), mPostList);
+        lvPost.setAdapter(adapter);
     }
 
-    private void getJSON(){
+    private void getJSON(final int id){
         class GetJSON extends AsyncTask<Void,Void,String> {
 
             ProgressDialog loading;
@@ -169,7 +153,7 @@ public class Tab2Newsfeed extends Fragment {
             @Override
             protected String doInBackground(Void... params) {
                 RequestHandler rh = new RequestHandler();
-                String s = rh.sendGetRequest(Configuration.URL_GET_POST_ALL);
+                String s = rh.sendGetRequest(Configuration.URL_GET_POST_ALL + "?id=" + id);
                 return s;
             }
         }

@@ -1,6 +1,11 @@
 package com.example.faceteknik;
 
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,8 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
-import android.widget.ListView;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.faceteknik.API.User;
 import com.example.faceteknik.Database.Configuration;
@@ -18,10 +24,8 @@ import com.example.faceteknik.Database.RequestHandler;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import static com.example.faceteknik.Database.Configuration.STATIC_USER_ID;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,7 +41,10 @@ public class Tab3Profile extends Fragment {
     TextView birthdate;
     TextView bio;
 
-    private int userID;
+    Button btnLogout;
+    SharedPreferences sharedPreferences;
+
+    private int currentId;
 
     public Tab3Profile() {
         // Required empty public constructor
@@ -48,7 +55,12 @@ public class Tab3Profile extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tab3_profile, container, false);
 
-        userID = getActivity().getIntent().getIntExtra("userID", 0);
+        Intent intent = getActivity().getIntent();
+        if(intent.getExtras() != null)
+        {
+            currentId = intent.getExtras().getInt("currentId", 0);
+//            Toast.makeText(getActivity(), "currentId = " + currentId, Toast.LENGTH_LONG).show();
+        }
 
         username = (TextView) view.findViewById(R.id.username_profile);
         fullname = (TextView) view.findViewById(R.id.fullname_profile);
@@ -56,15 +68,63 @@ public class Tab3Profile extends Fragment {
         birthdate = (TextView) view.findViewById(R.id.birthdate_profile);
         bio = (TextView) view.findViewById(R.id.bio_profile);
 
+        btnLogout = (Button) view.findViewById(R.id.btn_tab3_logout);
+
         // call getJson to get user identity
-//        getJSON(1);
+        getJSON(currentId);
 
+        // log out process
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder myBuilder = new AlertDialog.Builder(getContext());
+                myBuilder.setTitle("Apakah anda ingin logout?");
+                myBuilder.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
+                        // system logout
+                        if (removeKeyPreference()) {
+                            getActivity().finish();
+                            startActivity(new Intent(getContext(), LoginActivity.class));
+                        } else {
+                            Toast.makeText(getContext(), "Logout failed!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                myBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                myBuilder.show();
+            }
+        });
 
         return view;
     }
 
-    private void showUser(){
+    private boolean removeKeyPreference () {
+
+        try {
+            // open shared preference
+            sharedPreferences = this.getActivity().getSharedPreferences(Configuration.STATIC_PREFERENCE, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+            // remove key
+            editor.remove(STATIC_USER_ID);
+
+            // commit
+            editor.commit();
+
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private void showUser(int id){
         JSONObject jsonObject = null;
         try {
             jsonObject = new JSONObject(JSON_STRING);
@@ -73,14 +133,14 @@ public class Tab3Profile extends Fragment {
             {
                 for(int i = 0; i<result.length(); i++){
                     JSONObject jo = result.getJSONObject(i);
-                    int id = jo.getInt(Configuration.KEY_ID);
+                    int idUser = jo.getInt(Configuration.KEY_ID);
                     String userName = jo.getString(Configuration.KEY_USERNAME);
                     String fullName = jo.getString(Configuration.KEY_FULLNAME);
                     String emailData = jo.getString(Configuration.KEY_EMAIL);
                     String tanggalLahir = jo.getString(Configuration.KEY_TANGGALLAHIR);
                     String bioData = jo.getString(Configuration.KEY_BIO);
 
-                    if(id == 1)
+                    if(idUser == id)
                     {
                         // display identity in activity
                         fullname.setText(fullName);
@@ -114,7 +174,7 @@ public class Tab3Profile extends Fragment {
                 super.onPostExecute(s);
                 loading.dismiss();
                 JSON_STRING = s;
-                showUser();
+                showUser(id);
             }
 
             @Override

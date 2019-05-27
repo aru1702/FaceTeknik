@@ -5,9 +5,9 @@ public class Notification {
     private int id;
     private String userPost;
     private String date;
-    private boolean alreadyRead;
+    private int alreadyRead;
 
-    public Notification(int id, String userPost, String date, boolean alreadyRead) {
+    public Notification(int id, String userPost, String date, int alreadyRead) {
         this.id = id;
         this.userPost = userPost;
         this.date = date;
@@ -26,7 +26,7 @@ public class Notification {
         return date;
     }
 
-    public boolean isAlreadyRead() {
+    public int isAlreadyRead() {
         return alreadyRead;
     }
 }

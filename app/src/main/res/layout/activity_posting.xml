@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F3F3F3"
-    tools:context=".PostingActivity">
+    tools:context=".PostingActivity" >
 
     <EditText
         android:id="@+id/textPosting"
@@ -25,6 +25,51 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <LinearLayout
+        android:id="@+id/stiker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textPosting">
+
+        <Button
+            android:id="@+id/stiker1"
+            android:layout_width="75dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="28dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textPosting" />
+
+        <Button
+            android:id="@+id/stiker2"
+            android:layout_width="75dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="28dp"
+            app:layout_constraintStart_toEndOf="@+id/stiker1"
+            app:layout_constraintTop_toBottomOf="@+id/textPosting" />
+
+        <Button
+            android:id="@+id/stiker3"
+            android:layout_width="75dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="28dp"
+            app:layout_constraintStart_toEndOf="@+id/stiker2"
+            app:layout_constraintTop_toBottomOf="@+id/textPosting" />
+
+        <Button
+            android:id="@+id/stiker4"
+            android:layout_width="75dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="28dp"
+            app:layout_constraintStart_toEndOf="@+id/stiker3"
+            app:layout_constraintTop_toBottomOf="@+id/textPosting" />
+    </LinearLayout>
+
+
     <Button
         android:id="@+id/buttonPosting"
         android:layout_width="166dp"
@@ -35,7 +80,7 @@
         android:background="@drawable/makepostbtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stiker2" />
+        app:layout_constraintTop_toBottomOf="@+id/stiker" />
 
 
     <Button
@@ -49,41 +94,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonPosting" />
-
-    <Button
-        android:id="@+id/stiker1"
-        android:layout_width="75dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textPosting" />
-
-    <Button
-        android:id="@+id/stiker2"
-        android:layout_width="75dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintStart_toEndOf="@+id/stiker1"
-        app:layout_constraintTop_toBottomOf="@+id/textPosting" />
-
-    <Button
-        android:id="@+id/stiker3"
-        android:layout_width="75dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintStart_toEndOf="@+id/stiker2"
-        app:layout_constraintTop_toBottomOf="@+id/textPosting" />
-
-    <Button
-        android:id="@+id/stiker4"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintStart_toEndOf="@+id/stiker3"
-        app:layout_constraintTop_toBottomOf="@+id/textPosting" />
 
 </android.support.constraint.ConstraintLayout>

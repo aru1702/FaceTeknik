@@ -1,6 +1,7 @@
 package com.example.faceteknik;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,10 +41,20 @@ public class Tab1Adapter extends ArrayAdapter {
         tvUsername.setText(notification.getUserPost());
         tvDate.setText(notification.getDate());
 
-        if(notification.isAlreadyRead())
-            tvStatus.setText("Already Read");
-        else
+        System.out.println("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz" + notification.isAlreadyRead());
+
+        if(notification.isAlreadyRead() == 0)
+        {
+            convertView.setBackgroundColor(Color.parseColor("#E5FFF5"));
             tvStatus.setText("New Post!1!1!1!");
+
+        }
+        else
+        {
+            convertView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            tvStatus.setText("Already Read");
+
+        }
 
         convertView.setTag(notification.getId());
 

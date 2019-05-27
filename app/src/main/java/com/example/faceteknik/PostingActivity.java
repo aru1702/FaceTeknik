@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -18,7 +17,8 @@ import java.util.HashMap;
 
 public class PostingActivity extends AppCompatActivity {
 
-    String stickerSelect = "Sticker1";
+    private String stickerSelect;
+    private int currentId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,46 +34,53 @@ public class PostingActivity extends AppCompatActivity {
         final Button sticker3 = (Button) findViewById(R.id.stiker3);
         final Button sticker4 = (Button) findViewById(R.id.stiker4);
 
-        sticker1.setBackgroundResource(R.drawable.sticker1);
-        sticker2.setBackgroundResource(R.drawable.sticker2);
-        sticker3.setBackgroundResource(R.drawable.sticker3);
-        sticker4.setBackgroundResource(R.drawable.sticker4);
+        sticker1.setBackgroundResource(Sticker.SATU.getID());
+        sticker2.setBackgroundResource(Sticker.DUA.getID());
+        sticker3.setBackgroundResource(Sticker.TIGA.getID());
+        sticker4.setBackgroundResource(Sticker.EMPAT.getID());
+
+        Intent intent = getIntent();
+        if(intent.getExtras() != null)
+        {
+            currentId = intent.getExtras().getInt("currentId", 0);
+//            Toast.makeText(PostingActivity.this, "currentId = " + currentId, Toast.LENGTH_LONG).show();
+        }
 
         //PILIH STIKER//
 
         sticker1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stickerSelect = "Sticker1";
+                stickerSelect = Sticker.SATU.toString();
 
-                sticker1.setBackgroundResource(R.drawable.sticker1);
-                sticker2.setBackgroundResource(R.drawable.sticker2);
-                sticker3.setBackgroundResource(R.drawable.sticker3);
-                sticker4.setBackgroundResource(R.drawable.sticker4);
+                sticker1.setAlpha((float) 1);
+                sticker2.setAlpha((float) 0.25);
+                sticker3.setAlpha((float) 0.25);
+                sticker4.setAlpha((float) 0.25);
             }
         });
 
         sticker2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stickerSelect = "Sticker2";
+                stickerSelect = Sticker.DUA.toString();
 
-                sticker1.setBackgroundResource(R.drawable.sticker1);
-                sticker2.setBackgroundResource(R.drawable.sticker2);
-                sticker3.setBackgroundResource(R.drawable.sticker3);
-                sticker4.setBackgroundResource(R.drawable.sticker4);
+                sticker1.setAlpha((float) 0.25);
+                sticker2.setAlpha((float) 1);
+                sticker3.setAlpha((float) 0.25);
+                sticker4.setAlpha((float) 0.25);
             }
         });
 
         sticker3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stickerSelect = "Sticker3";
+                stickerSelect = Sticker.TIGA.toString();
 
-                sticker1.setBackgroundResource(R.drawable.sticker1);
-                sticker2.setBackgroundResource(R.drawable.sticker2);
-                sticker3.setBackgroundResource(R.drawable.sticker3);
-                sticker4.setBackgroundResource(R.drawable.sticker4);
+                sticker1.setAlpha((float) 0.25);
+                sticker2.setAlpha((float) 0.25);
+                sticker3.setAlpha((float) 1);
+                sticker4.setAlpha((float) 0.25);
             }
         });
 
@@ -81,12 +88,12 @@ public class PostingActivity extends AppCompatActivity {
         sticker4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                stickerSelect = "Sticker4";
+                stickerSelect = Sticker.EMPAT.toString();
 
-                sticker1.setBackgroundResource(R.drawable.sticker1);
-                sticker2.setBackgroundResource(R.drawable.sticker2);
-                sticker3.setBackgroundResource(R.drawable.sticker3);
-                sticker4.setBackgroundResource(R.drawable.sticker4);
+                sticker1.setAlpha((float) 0.25);
+                sticker2.setAlpha((float) 0.25);
+                sticker3.setAlpha((float) 0.25);
+                sticker4.setAlpha((float) 1);
             }
         });
         //END PILIH STIKER//
@@ -97,10 +104,14 @@ public class PostingActivity extends AppCompatActivity {
                 String post = textPosting.getText().toString();
 
                 //DATABASE//
-                addPost(1, stickerSelect, post);
-
-                Intent mainMenuIntent = new Intent(PostingActivity.this , Menu.class);
-                startActivity(mainMenuIntent);
+                if(post != null && stickerSelect != null)
+                {
+                    addPost(currentId, stickerSelect, post);
+                }
+                else
+                {
+                    Toast.makeText(PostingActivity.this, "Teks dan Stiker harus diisi", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -108,14 +119,13 @@ public class PostingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent mainMenuIntent = new Intent(PostingActivity.this , Menu.class);
+                mainMenuIntent.putExtra("currentId", currentId);
                 startActivity(mainMenuIntent);
             }
         });
     }
 
     private void addPost(final int idUser, final String image, final String text){
-
-
 
         class AddPost extends AsyncTask<Void,Void,String> {
 
@@ -124,7 +134,7 @@ public class PostingActivity extends AppCompatActivity {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                loading = ProgressDialog.show(PostingActivity.this,"Menambahkan Post...","Mohon Tunggu...",false);
+                loading = ProgressDialog.show(PostingActivity.this,"","",false);
             }
 
             @Override
@@ -132,6 +142,9 @@ public class PostingActivity extends AppCompatActivity {
                 super.onPostExecute(s);
                 loading.dismiss();
                 Toast.makeText(PostingActivity.this,s,Toast.LENGTH_LONG).show();
+                Intent mainMenuIntent = new Intent(PostingActivity.this , Menu.class);
+                mainMenuIntent.putExtra("currentId", currentId);
+                startActivity(mainMenuIntent);
             }
 
             @Override
