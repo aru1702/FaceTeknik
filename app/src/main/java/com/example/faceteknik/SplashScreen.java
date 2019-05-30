@@ -21,7 +21,6 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
 
         // get Id
-        //
         getFromPreference();
 
         // hold for 2 seconds

@@ -19,7 +19,7 @@
         android:ems="10"
         android:fontFamily="@font/open_sans"
         android:gravity="start|top"
-        android:hint="Post"
+        android:hint="Comment"
         android:inputType="textMultiLine"
         android:lines="5"
         android:singleLine="false"

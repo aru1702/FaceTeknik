@@ -64,7 +64,7 @@ public class AddFriend extends AppCompatActivity {
         if(intent.getExtras() != null)
         {
             currentId = intent.getExtras().getInt("currentId", 0);
-            Toast.makeText(getApplicationContext(),"currentId = " + currentId, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getApplicationContext(),"currentId = " + currentId, Toast.LENGTH_SHORT).show();
         }
 
         home.setOnClickListener(new View.OnClickListener() {

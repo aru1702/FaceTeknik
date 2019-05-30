@@ -54,7 +54,6 @@ public class AddComment extends AppCompatActivity {
                 startActivity(mainMenuIntent);
             }
         });
-
     }
 
     private void addComment(final int idPost, final int idUser, final String comment){

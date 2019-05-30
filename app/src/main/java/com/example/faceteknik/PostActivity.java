@@ -72,7 +72,7 @@ public class PostActivity extends AppCompatActivity implements ListView.OnItemCl
 //        isiPost.setText("isi post" + idPost);
 //        usernamePost.setText("username");
 
-                    Toast.makeText(PostActivity.this, "currentId = " + stickerSelect + "postId" + idPost, Toast.LENGTH_LONG).show();
+//                    Toast.makeText(PostActivity.this, "currentId = " + stickerSelect + "postId" + idPost, Toast.LENGTH_LONG).show();
 
         ListView lv = (ListView) findViewById(R.id.commentList);
         lvComment = lv;
